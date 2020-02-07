@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Weather.css';
+import './css/Weather.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import dateBuilder from "./Datebuilder";
 const api = {
