@@ -1,5 +1,5 @@
 # lido-weather-broadcast-app
-This is a weather broadcast website which show us temp
+This is a weather broadcast website which show us temperature According to day and hourly.
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
