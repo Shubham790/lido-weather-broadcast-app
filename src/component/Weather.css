@@ -53,7 +53,7 @@ main {
 
 .search-box {
   width: 100%;
-  margin: 0 0 75px;
+  /* margin: 0 0 75px; */
 }
 
 .search-box .search-bar:focus {
@@ -84,7 +84,10 @@ main {
 .weather-box .temp {
   position: relative;
   display: inline-block;
-  margin: 30px auto;
+  /* margin: 10px auto; */
+  margin-top: 10px;
+  margin-right: auto;
+  margin-left: auto;
   background-color: rgba(255, 255, 255, 0.2);
   border-radius: 16px;
 
