@@ -16,9 +16,9 @@ function Weather() {
   const [ten1,ten]=useState('');
   let [wea,wea1]=useState('false');
   let [counter]=useState(1);
+  let [display,display1]=useState('false');
+  let [error,error1]=useState('');
   const todaySearch = evt => {
-    if(query!=="")
-    {
       fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
         .then(res =>{
           if(res.ok === true){
@@ -28,17 +28,13 @@ function Weather() {
           }
           else
           {
-            alert('Please Enter a valid city');
+            display1('true');
+            tom('false');ten('false'); settoday('false');
+            error1("Please Enter a valid city")
           }
         })
-    }
-    else{
-      alert('Please enter a City Name ');
-    }
   }
   const tommorowSearch = evt => {
-    if(query!=="")
-    {
       fetch(`${api.base}forecast?q=${query}&units=metric&cnt=10&APPID=${api.key}`)
         .then(res =>{
           if(res.ok === true){
@@ -49,23 +45,20 @@ function Weather() {
           }
           else
           {
-            alert('Please Enter a valid city');
+            display1('true');
+            tom('false');ten('false'); settoday('false');
+            error1("Please Enter a valid city");
           }
         })
-    }
-    else
-    {
-      alert("Please Enter City Name");
-    }
   }
   const handleToday = evt=>{
-    tom('false');ten('false'); settoday('true') ;todaySearch();
+    tom('false');ten('false'); settoday('true') ;todaySearch();display1("false")
   }
   const handleTomorrow = evt=>{
-    tom('true');ten('false');settoday('false'); tommorowSearch()
+    tom('true');ten('false');settoday('false'); tommorowSearch();display1("false")
   }
   const handleHourly = evt=>{
-    ten('true');tom('false');settoday('false');tommorowSearch()
+    ten('true');tom('false');settoday('false');tommorowSearch();display1("false")
   }
   return (
     <div className={(typeof weather.main != "undefined") ? ((weather.main.temp > 16) ? 'app warm' : 'app') : 'app'}>
@@ -81,9 +74,13 @@ function Weather() {
             maxLength='30'
             value={query}
             />
-          <button type="button" className="btn btn-info" style={{margin:"20px 90px"}} onClick={()=>{handleToday()}}>Today</button>
-          <button type="button" className="btn btn-info" style={{margin:"20px 90px"}} onClick={()=> {handleTomorrow()}}> Hourly</button>
-          <button type="button" className="btn btn-info" style={{margin:"20px 90px"}} onClick={()=> {handleHourly()}}>Tommorow</button>
+            { display==="true"?<div className="jumbotron text center font-weight-bold">
+              {error}
+             </div>:""
+            }
+          <button type="button" className="btn btn-info" style={{margin:"10px 10px"}} onClick={()=>{handleToday()}}>Today</button>
+          <button type="button" className="btn btn-info" style={{margin:"20px 10px"}} onClick={()=> {handleTomorrow()}}> Hourly</button>
+          <button type="button" className="btn btn-info" style={{margin:"20px 10px"}} onClick={()=> {handleHourly()}}>Tommorow</button>
         </div>
         {
           Today==="true"?(typeof weather.main != "undefined")?<div>
