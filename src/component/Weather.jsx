@@ -88,7 +88,7 @@ function Weather() {
               <div className="temp" onClick ={()=>{wea==="true"?wea1('false'):wea1('true')}}>
                 {wea === "true" ? Math.round(weather.main.temp)+'°C':Math.round(((weather.main.temp*9/5)+32))+'°F'}
                 {
-                  (weather.weather[0].main)==="Rain"?<i class="fas fa-cloud-sun-rain"></i>: (weather.weather[0].main)==="Clear"?<i class="fas fa-sun"></i>:<i class="fas fa-cloud"></i>
+                  (weather.weather[0].main)==="Rain"?<i className="fas fa-cloud-sun-rain"></i>: (weather.weather[0].main)==="Clear"?<i className="fas fa-sun"></i>:<i className="fas fa-cloud"></i>
                 }
               </div>
             </div>
@@ -106,7 +106,7 @@ function Weather() {
                     <div className="temp" onClick ={()=>{wea==="true"?wea1('false'):wea1('true')}}>
                       {wea === "true" ? Math.round(weather.main.temp)+'°C':Math.round(((weather.main.temp*9/5)+32))+'°F'}
                       {
-                        (weather.weather[0].main)==="Rain"?<i class="fas fa-cloud-sun-rain"></i>: (weather.weather[0].main)==="Clear"?<i class="fas fa-sun"></i>:<i class="fas fa-cloud"></i>
+                        (weather.weather[0].main)==="Rain"?<i className="fas fa-cloud-sun-rain"></i>: (weather.weather[0].main)==="Clear"?<i className="fas fa-sun"></i>:<i className="fas fa-cloud"></i>
                        }
                     </div>
                   </div>
@@ -127,7 +127,7 @@ function Weather() {
                     <div className="temp" onClick ={()=>{wea==="true"?wea1('false'):wea1('true')}}>
                       {wea === "true" ? Math.round(weather.main.temp)+'°C':Math.round(((weather.main.temp*9/5)+32))+'°F'}
                       {
-                        (weather.weather[0].main)==="Rain"?<i class="fas fa-cloud-sun-rain"></i>: (weather.weather[0].main)==="Clear"?<i class="fas fa-sun"></i>:<i class="fas fa-cloud"></i>
+                        (weather.weather[0].main)==="Rain"?<i className="fas fa-cloud-sun-rain"></i>: (weather.weather[0].main)==="Clear"?<i className="fas fa-sun"></i>:<i className="fas fa-cloud"></i>
                       }
                     </div>
                   </div>
