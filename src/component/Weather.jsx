@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import './css/Weather.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {
+  Card
+} from 'reactstrap';
+
 import dateBuilder from "./Datebuilder";
 const api = {
   key: "ccb13f92ca8be364ae16f047190e6218",
@@ -19,37 +23,37 @@ function Weather() {
   let [display,display1]=useState('false');
   let [error,error1]=useState('');
   const todaySearch = evt => {
-      fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
-        .then(res =>{
-          if(res.ok === true){
-            res.json().then(result=>{
-              setWeather(result);
-            })
-          }
-          else
-          {
-            display1('true');
-            tom('false');ten('false'); settoday('false');
-            error1("Please Enter a valid city")
-          }
-        })
+    fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
+      .then(res =>{
+        if(res.ok === true){
+          res.json().then(result=>{
+            setWeather(result);
+          })
+        }
+        else
+        {
+          display1('true');
+          tom('false');ten('false'); settoday('false');
+          error1("Please Enter a valid city")
+        }
+      })
   }
   const tommorowSearch = evt => {
-      fetch(`${api.base}forecast?q=${query}&units=metric&cnt=10&APPID=${api.key}`)
-        .then(res =>{
-          if(res.ok === true){
-            res.json().then(result=>{
-              setWeather1(result.list);
-              city(result.city);
-            })
-          }
-          else
-          {
-            display1('true');
-            tom('false');ten('false'); settoday('false');
-            error1("Please Enter a valid city");
-          }
-        })
+    fetch(`${api.base}forecast?q=${query}&units=metric&cnt=10&APPID=${api.key}`)
+      .then(res =>{
+        if(res.ok === true){
+          res.json().then(result=>{
+            setWeather1(result.list);
+            city(result.city);
+          })
+        }
+        else
+        {
+          display1('true');
+          tom('false');ten('false'); settoday('false');
+          error1("Please Enter a valid city");
+        }
+      })
   }
   const handleToday = evt=>{
     tom('false');ten('false'); settoday('true') ;todaySearch();display1("false")
@@ -64,24 +68,30 @@ function Weather() {
     <div className={(typeof weather.main != "undefined") ? ((weather.main.temp > 16) ? 'app warm' : 'app') : 'app'}>
       <main>
         <center><h1 style={{"color":"white"}}>Weather Broadcast</h1></center><br></br>
-        <div className="search-box">
-          <input
-            type="text"
-            className="search-bar"
-            placeholder="Search..."
-            onChange={e => setQuery(e.target.value)}
-            minLength='3'
-            maxLength='30'
-            value={query}
-            />
+        
+        <Card >
+          <div className="search-box">
+            <input
+              type="text"
+              className="search-bar"
+              placeholder="Search..."
+              onChange={e => setQuery(e.target.value)}
+              minLength='3'
+              maxLength='30'
+              value={query}
+              />
             { display==="true"?<div className="jumbotron text center font-weight-bold">
               {error}
-             </div>:""
+            </div>:""
             }
-          <button type="button" className="btn btn-info" style={{margin:"10px 10px"}} onClick={()=>{handleToday()}}>Today</button>
-          <button type="button" className="btn btn-info" style={{margin:"20px 10px"}} onClick={()=> {handleTomorrow()}}> Hourly</button>
-          <button type="button" className="btn btn-info" style={{margin:"20px 10px"}} onClick={()=> {handleHourly()}}>Tommorow</button>
-        </div>
+            <br/>
+          </div>
+          <div style={{  flexDirection:"row"}}>
+            <button type="button" className="btn btn-info" style={{margin:'3px'}} onClick={()=>{handleToday()}}>Today</button>
+            <button type="button" className="btn btn-info" style={{margin:'3px'}} onClick={()=> {handleTomorrow()}}> Hourly</button>
+            <button type="button" className="btn btn-info" style={{margin:'3px'}} onClick={()=> {handleHourly()}}>Tommorow</button>
+          </div>
+        </Card>
         {
           Today==="true"?(typeof weather.main != "undefined")?<div>
             <div className="weather-box">
@@ -102,12 +112,12 @@ function Weather() {
             {
               weather1.map(weather=>{
                 return <div style={{"width":"50%"}} key={counter=counter+1}>
-                <div className="weather-box" >
+                  <div className="weather-box" >
                     <div className="temp" onClick ={()=>{wea==="true"?wea1('false'):wea1('true')}}>
                       {wea === "true" ? Math.round(weather.main.temp)+'°C':Math.round(((weather.main.temp*9/5)+32))+'°F'}
                       {
                         (weather.weather[0].main)==="Rain"?<i className="fas fa-cloud-sun-rain"></i>: (weather.weather[0].main)==="Clear"?<i className="fas fa-sun"></i>:<i className="fas fa-cloud"></i>
-                       }
+                      }
                     </div>
                   </div>
                   <div className="location-box" >
